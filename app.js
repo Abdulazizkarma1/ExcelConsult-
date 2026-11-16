@@ -78,14 +78,14 @@ form.addEventListener('submit',ev=>{
  if(!form.reportValidity())return;
  const fd=new FormData(form);
  const phone=String(fd.get('phone')||'').trim();
- if(phone&&!/^\\+?[0-9 ()-]{7,20}$/.test(phone)){err.textContent='Please enter a valid phone number or leave the optional field blank.';err.hidden=false;form.elements.phone.focus();return}
+ if(phone&&!/^\+?[0-9 ()-]{7,20}$/.test(phone)){err.textContent='Please enter a valid phone number or leave the optional field blank.';err.hidden=false;form.elements.phone.focus();return}
  preparing=true;
  const btn=document.getElementById('submitInquiry');btn.disabled=true;btn.textContent='Preparing enquiry…';
  const channel=String(fd.get('channel'));
- const message=['Hello ExcelConsult Research & Technology,','I would like to request a consultation.','','Name: '+fd.get('name'),'Email: '+fd.get('email'),'Phone: '+(phone||'Not provided'),'Client type: '+fd.get('clientType'),'Service category: '+fd.get('category'),'Specific service: '+fd.get('service'),'Timeline: '+fd.get('timeline'),'Preferred contact: '+channel,'Project requirements: '+fd.get('details'),'','Please advise on next steps and a quotation.'].join('\\n');
+ const message=['Hello ExcelConsult Research & Technology,','I would like to request a consultation.','','Name: '+fd.get('name'),'Email: '+fd.get('email'),'Phone: '+(phone||'Not provided'),'Client type: '+fd.get('clientType'),'Service category: '+fd.get('category'),'Specific service: '+fd.get('service'),'Timeline: '+fd.get('timeline'),'Preferred contact: '+channel,'Project requirements: '+fd.get('details'),'','Please advise on next steps and a quotation.'].join('\n');
  prepared.value=message;result.hidden=false;
  const validWhatsApp=/^[1-9][0-9]{7,14}$/.test(BUSINESS.whatsapp);
- const validEmail=/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(BUSINESS.email);
+ const validEmail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(BUSINESS.email);
  contactlink.hidden=true;
  if(channel==='WhatsApp'&&validWhatsApp){contactlink.href='https://wa.me/'+BUSINESS.whatsapp+'?text='+encodeURIComponent(message);contactlink.textContent='Open WhatsApp ↗';contactlink.hidden=false}
  else if(validEmail){contactlink.href='mailto:'+BUSINESS.email+'?subject='+encodeURIComponent('ExcelConsult consultation enquiry')+'&body='+encodeURIComponent(message);contactlink.textContent='Open email app ↗';contactlink.hidden=false}
