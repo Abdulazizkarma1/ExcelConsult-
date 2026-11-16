@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://excelconsultghana.vercel.app/sitemap.xml
